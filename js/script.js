@@ -394,7 +394,21 @@ const PROJECTS = [
       {
         heading: "Württembergische",
         text: "Kampagne für diverse Produkte der Württembergischen Versicherung. Im Briefing wurden „echte“ Bilder gewünscht — ausschließlich aus Stockdatenbanken.",
-        media: [ m("Württembergische_Versicherung.gif") ]
+        media: [
+          slideshow([
+            "250107_Layouts_Wü_AOKomm7.jpg",
+            "250113_Layouts_Wü_AOKomm_Route1C.jpg",
+            "250113_Layouts_Wü_AOKomm_Route1_Rente.jpg",
+            "250113_Layouts_Wü_AOKomm_Route1_Vitalbudget.jpg",
+            "250114_Layouts_Wü_AOKomm_Route1_Fussi.jpg",
+            "250114_Layouts_Wü_AOKomm_Route2_Copy2.jpg",
+            "250114_Layouts_Wü_AOKomm_Route2_Kfz.jpg",
+            "250114_Layouts_Wü_AOKomm_Route2_Rückbank2.jpg",
+            "250114_Layouts_Wü_AOKomm_Route2_final.jpg",
+            "250114_Layouts_Wü_AOKomm_Route2_final2.jpg",
+            "250114_Layouts_Wü_AOKomm_Route2_neu.jpg"
+          ])
+        ]
       }
     ]
   },
@@ -409,7 +423,6 @@ const PROJECTS = [
       appLink("apps/kniffel/index.html", "Kniffeln", "pink"),
       appLink("apps/blog/index.html", "Schreiben", "green"),
       appLink("https://www.kleinanzeigen.de/s-bestandsliste.html?userId=27602823", "Zu Verkaufen", "green"),
-      comingSoon("Häkeln", "white"),
       comingSoon("Fotografieren", "pink")
     ]
   }
