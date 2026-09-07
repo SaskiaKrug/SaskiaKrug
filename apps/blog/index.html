@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Saskia Krug</title>
+<link rel="icon" type="image/png" href="../../assets/header/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,440;9..144,520&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../../css/panda-hunt.css">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "488ae56f09494317940a89add49a02ae"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body data-panda-page="blog">
+
+<a href="../../index.html#fun-projects" class="app__back app__back--overlay"><span>←</span> Zurück zur Seite</a>
+
+<div class="blog-hero">
+  <div class="blog-hero__bg" style="background-image:url('../../assets/header/closing-bg.jpeg')"></div>
+  <div class="blog-hero__overlay"></div>
+  <div class="blog-hero__content">
+    <p class="blog-hero__eyebrow">Fun Projects</p>
+    <h1 class="blog-hero__title">Life of Saskia</h1>
+  </div>
+</div>
+
+<header class="app__header">
+  <p class="app__sub">Liebes Tagebuch...</p>
+</header>
+
+<!-- LIST -->
+<section class="list" id="postList"></section>
+
+<!-- SINGLE POST -->
+<section class="post" id="postView" hidden>
+  <button type="button" class="post__back" id="postBackBtn"><span>←</span> Zur Übersicht</button>
+  <article class="post__card" id="postCard">
+    <img src="../../assets/header/SK_Logo.png" class="post__logo" alt="SK">
+    <p class="post__date" id="postDate"></p>
+    <h2 class="post__title" id="postTitle"></h2>
+    <div class="post__body" id="postBody"></div>
+  </article>
+  <button type="button" class="post__back post__back--bottom" id="postBackBtnBottom"><span>←</span> Zur Übersicht</button>
+</section>
+
+<script src="posts.js"></script>
+<script src="script.js"></script>
+<script>window.PANDA_ASSET_BASE = "../../assets/";</script>
+<script src="../../js/panda-hunt.js"></script>
+</body>
+</html>

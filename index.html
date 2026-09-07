@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saskia Krug — Creative Director</title>
+<link rel="icon" type="image/png" href="assets/header/favicon.png">
+<meta name="description" content="Saskia Krug, Creative Director (Art) aus Hamburg. Ausgewählte Arbeiten aus knapp 20 Jahren Werbung.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,440;9..144,520&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/panda-hunt.css">
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "488ae56f09494317940a89add49a02ae"}'></script><!-- End Cloudflare Web Analytics -->
+</head>
+<body data-panda-page="home">
+
+<!-- PASSWORD GATE -->
+<div class="password-gate is-hidden" id="passwordGate">
+  <button class="gallery-overlay__close password-gate__close" id="passwordClose" aria-label="Schließen">&times;</button>
+  <form class="password-gate__box" id="passwordForm">
+    <img src="assets/header/SK_Logo.png" alt="SK" class="password-gate__logo">
+    <p class="password-gate__label">Für ein paar weitere Arbeiten</p>
+    <input type="password" id="passwordInput" placeholder="Passwort" autocomplete="off" required>
+    <button type="submit">Rein</button>
+    <p class="password-gate__error" id="passwordError" hidden>Falsches Passwort.</p>
+  </form>
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <a href="#top" class="nav__mark" aria-label="Nach oben">
+    <img src="assets/header/SK_Logo_white.png" alt="SK" class="nav__logo nav__logo--dark">
+    <img src="assets/header/SK_Logo.png" alt="SK" class="nav__logo nav__logo--light">
+  </a>
+  <nav class="nav__links">
+    <a href="#work">Work</a>
+    <a href="#" id="navAbout">About Me</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="nav__social">
+    <a href="https://www.instagram.com/saskiakrug/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.6"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/saskia-krug/" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="2.5" width="19" height="19" rx="4"/><line x1="7.3" y1="10" x2="7.3" y2="16.5"/><circle cx="7.3" cy="6.7" r="0.2" fill="currentColor"/><path d="M11.3 16.5v-4c0-1.6 1-2.6 2.5-2.6s2.4 1 2.4 2.6v4"/><line x1="11.3" y1="10" x2="11.3" y2="16.5"/></svg>
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <video class="hero__bg" data-parallax="0.35" src="assets/header/hero-motte.mp4" poster="assets/header/hero-bg.jpeg" autoplay muted loop playsinline></video>
+  <div class="hero__overlay"></div>
+  <div class="hero__content">
+    <h1>Saskia Krug</h1>
+    <p class="eyebrow">Creative Director (Art)<br>Hamburg</p>
+  </div>
+  <button class="scroll-cue" data-scroll-to="#work" aria-label="Nach unten scrollen">
+    <span></span>
+  </button>
+</section>
+
+<!-- TICKER (Test) -->
+<div class="ticker">
+  <div class="ticker__clip">
+    <div class="ticker__track">
+      <span class="ticker__item">Breaking News +++ Currently Available +++</span>
+      <span class="ticker__item">Breaking News +++ Currently Available +++</span>
+      <span class="ticker__item">Breaking News +++ Currently Available +++</span>
+      <span class="ticker__item">Breaking News +++ Currently Available +++</span>
+      <span class="ticker__item">Breaking News +++ Currently Available +++</span>
+      <span class="ticker__item">Breaking News +++ Currently Available +++</span>
+      <span class="ticker__item">Breaking News +++ Currently Available +++</span>
+      <span class="ticker__item">Breaking News +++ Currently Available +++</span>
+    </div>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <p class="section-label" data-reveal>Arbeiten</p>
+  <div class="work__header" data-reveal>
+    <h2 class="work__heading">WORK, WORK, WORK</h2>
+    <button type="button" class="work__more-btn" id="unlockTriggerTop">Noch mehr Arbeiten</button>
+  </div>
+  <div class="work__grid" id="workGrid" data-reveal></div>
+</section>
+
+<!-- PLAYGROUND: NICKNAME GENERATOR -->
+<section class="playground" id="playground" data-reveal>
+  <p class="section-label">Let's go</p>
+  <h2 class="playground__heading">Who are you?</h2>
+  <p class="playground__intro">How do you want to be addressed, and which drawer should your new name come from?</p>
+
+  <div class="playground__controls">
+    <div class="playground__group">
+      <span class="playground__label">Title</span>
+      <div class="playground__pills" id="genderPills">
+        <button type="button" class="pill" data-value="female">female</button>
+        <button type="button" class="pill" data-value="male">male</button>
+        <button type="button" class="pill" data-value="neutral">neutral</button>
+      </div>
+    </div>
+    <div class="playground__group">
+      <span class="playground__label">Category</span>
+      <div class="playground__pills" id="categoryPills">
+        <button type="button" class="pill" data-value="powerpoint">PowerPoint</button>
+        <button type="button" class="pill" data-value="marketing">Marketing Slang</button>
+        <button type="button" class="pill" data-value="feedback">Client Feedback</button>
+        <button type="button" class="pill" data-value="animals">Animals</button>
+        <button type="button" class="pill" data-value="colors">Colors</button>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="playground__generate" id="generateBtn">Generate Name</button>
+
+  <div class="playground__result" id="playgroundResult" aria-live="polite">
+    <p class="playground__result-name" id="resultName">—</p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<footer class="contact" id="contact" data-reveal>
+  <div class="contact__bg" data-parallax="0.15" style="background-image:url('assets/header/closing-bg.jpeg')"></div>
+  <div class="contact__overlay"></div>
+  <div class="contact__content">
+    <p class="section-label">Kontakt</p>
+    <h2>Let's talk. ✨</h2>
+    <p class="contact__sub">Aktuell offen für Neues — ob remote, hybrid, Teilzeit oder Vollzeit.</p>
+
+    <form class="contact__form" id="contactForm" action="https://formspree.io/f/xzebpyow" method="POST">
+      <div class="contact__form-row">
+        <input type="text" name="name" placeholder="Dein Name" required>
+        <input type="email" name="email" placeholder="Deine E-Mail" required>
+      </div>
+      <textarea name="message" rows="4" placeholder="Deine Nachricht" required></textarea>
+      <input type="text" name="_gotcha" class="contact__hp" tabindex="-1" autocomplete="off">
+      <button type="submit" class="contact__submit">Nachricht senden</button>
+      <p class="contact__form-status" id="contactStatus" aria-live="polite"></p>
+    </form>
+
+    <a class="contact__book" href="https://calendly.com/lydiaswelt" rel="noopener">Hier direkt einen Termin buchen →</a>
+
+    <p class="contact__or">Oder klassisch per Mail:</p>
+    <a class="contact__mail" href="mailto:saskia.krug@gmx.net">saskia.krug@gmx.net</a>
+    <div class="contact__social">
+      <a href="https://www.instagram.com/saskiakrug/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.linkedin.com/in/saskia-krug/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <p class="contact__copy">© <span id="year"></span> Saskia Krug</p>
+    <button type="button" class="contact__unlock" id="unlockTrigger">🔒 Passwort für weitere Arbeiten</button>
+  </div>
+</footer>
+
+<!-- ABOUT OVERLAY -->
+<div class="gallery-overlay about-overlay" id="aboutOverlay">
+  <div class="gallery-overlay__bar">
+    <div>
+      <p class="gallery-overlay__client">Saskia Krug</p>
+      <h3>About Me</h3>
+    </div>
+    <button class="gallery-overlay__close" id="aboutClose" aria-label="Schließen">&times;</button>
+  </div>
+  <div class="gallery-overlay__body about-overlay__body">
+    <div class="about-overlay__hero">
+      <div class="about-overlay__hero-bg" data-parallax="0.2" style="background-image:url('assets/header/closing-bg.jpeg')"></div>
+      <div class="about-overlay__hero-overlay"></div>
+      <p class="about-overlay__greeting">
+        <span class="greet-line greet-line--1">Hey!</span>
+        <span class="greet-line greet-line--2">Ja, wie schön, dass du hier bist! <span class="greet-emoji">🪩</span></span>
+      </p>
+    </div>
+
+    <div class="about">
+      <div class="about__portrait" data-reveal>
+        <img src="assets/about/portrait.jpeg" alt="Porträt von Saskia Krug">
+      </div>
+      <div class="about__text" data-reveal>
+        <p class="about__lead">Ich bin Saskia, Kreative aus Hamburg und mittlerweile seit knapp 20 Jahren in der Werbewelt zuhause.</p>
+        <p>Ich hab vor 25 Jahren angefangen, Kommunikationsdesign zu studieren, weil ich unbedingt nach England wollte! Meine Uni hatte ein Partnerprogramm mit der Bucks New Uni in High Wycombe (da, wo Charlotte Roche herkommt) — gefühlt war es der einfachste Weg für mich, nach England zu ziehen. Den Abschluss habe ich dort gemacht, geblieben bin ich noch anderthalb Jahre länger und bin dann 2008 zurück nach Hamburg — und treibe seitdem mein Unheil in der Hamburger Werbewelt.</p>
+        <p>Ich bin sehr visuell getrieben, mit einer Vorliebe dafür, im Team an Kampagnen zu arbeiten — ob Telekommunikation, Mode oder Technik, irgendwie findet sich immer was Spannendes. Besonders in der Welt der Produktionen fühle ich mich zuhause. Zuletzt war ich als CD (Art) bei Leagas Delaney tätig, mit Fokus auf die Arbeit mit KI-Tools, um Kampagnen visuell weiterzubringen und mein Hirn explodieren zu lassen: Diese Seite habe ich mithilfe von Claude Code erstellt. Innerhalb eines Nachmittags. Hä? 🤯</p>
+
+        <div class="stats">
+          <div class="stats__item"><span>~20</span>Jahre Erfahrung</div>
+          <div class="stats__item"><span>30+</span>Awards</div>
+          <div class="stats__item"><span>8+</span>Agenturen</div>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline__row">
+            <span class="timeline__date">09.2024 – 07.2026</span>
+            <span class="timeline__role">CD (Art) <em>— Leagas Delaney</em></span>
+          </div>
+          <div class="timeline__row">
+            <span class="timeline__date">02.2022 – 12.2023</span>
+            <span class="timeline__role">CD (Art) <em>— TryNoAgency</em></span>
+          </div>
+          <div class="timeline__row">
+            <span class="timeline__date">05.2018 – 12.2021</span>
+            <span class="timeline__role">Senior AD <em>— DDB Hamburg</em></span>
+          </div>
+          <div class="timeline__row">
+            <span class="timeline__date">07.2017 – 04.2018</span>
+            <span class="timeline__role">Art Director <em>— Drehmoment</em></span>
+          </div>
+          <div class="timeline__row">
+            <span class="timeline__date">02.2015 – 11.2016</span>
+            <span class="timeline__role">Art Director <em>— Freunde des Hauses</em></span>
+          </div>
+          <div class="timeline__row">
+            <span class="timeline__date">01.2013 – 11.2014</span>
+            <span class="timeline__role">Art Director <em>— Neue Monarchie</em></span>
+          </div>
+          <div class="timeline__row">
+            <span class="timeline__date">07.2010 – 10.2012</span>
+            <span class="timeline__role">Jr Art Director <em>— Thjnk</em></span>
+          </div>
+          <div class="timeline__row">
+            <span class="timeline__date">05.2009 – 06.2010</span>
+            <span class="timeline__role">Junior Creative <em>— Grabarz &amp; Partner</em></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="clients">
+      <p class="section-label">Clients</p>
+      <ul class="clients__list">
+        <li>Telekom</li><li>Mercedes-Benz</li><li>HP</li><li>heycar</li><li>Lidl</li>
+        <li>Brita</li><li>Württembergische</li><li>Hamburger Abendblatt</li>
+        <li>Hagebaumarkt</li><li>HSV Handball</li><li>Volkswagen</li>
+        <li>Stage Entertainment</li><li>ARD</li>
+      </ul>
+    </section>
+
+    <section class="awards">
+      <p class="section-label">Awards</p>
+      <div class="awards__grid">
+        <p><strong>ADC</strong> — 1× Gold, 7× Silber, 18× Bronze</p>
+        <p><strong>Deutscher Digital Award</strong> — 2× Silber</p>
+        <p><strong>MAX Award</strong> — 1× Silber, 1× Bronze</p>
+        <p><strong>LIA</strong> — 1× Bronze</p>
+        <p><strong>Spotlight</strong> — 4× Silber, 2× Bronze</p>
+        <p><strong>EPICA</strong> — 1× Bronze</p>
+        <p><strong>Effie</strong> — 1× Bronze</p>
+        <p><strong>Klappe</strong> — 3× Gold, 2× Silber, 5× Bronze</p>
+        <p><strong>CLIO</strong> — 1× Gold, 1× Bronze</p>
+        <p><strong>Radio Advertising Award</strong> — 2× Gold</p>
+      </div>
+    </section>
+
+    <section class="about-overlay__contact">
+      <p class="section-label">Contact</p>
+      <h2>Let's talk. ✨</h2>
+      <p class="contact__sub">Aktuell offen für Neues — ob remote, hybrid, Teilzeit oder Vollzeit.</p>
+
+      <form class="contact__form" action="https://formspree.io/f/xzebpyow" method="POST">
+        <div class="contact__form-row">
+          <input type="text" name="name" placeholder="Dein Name" required>
+          <input type="email" name="email" placeholder="Deine E-Mail" required>
+        </div>
+        <textarea name="message" rows="4" placeholder="Deine Nachricht" required></textarea>
+        <input type="text" name="_gotcha" class="contact__hp" tabindex="-1" autocomplete="off">
+        <button type="submit" class="contact__submit">Nachricht senden</button>
+        <p class="contact__form-status" aria-live="polite"></p>
+      </form>
+
+      <a class="contact__book" href="https://calendly.com/lydiaswelt" rel="noopener">Hier direkt einen Termin buchen →</a>
+
+      <p class="contact__or">Oder klassisch per Mail:</p>
+      <a class="contact__mail" href="mailto:saskia.krug@gmx.net">saskia.krug@gmx.net</a>
+      <div class="contact__social">
+        <a href="https://www.instagram.com/saskiakrug/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/saskia-krug/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </section>
+
+    <button type="button" class="overlay-back" id="aboutBack">
+      <span class="overlay-back__arrow">←</span> Back
+    </button>
+  </div>
+</div>
+
+<!-- GALLERY OVERLAY -->
+<div class="gallery-overlay" id="galleryOverlay">
+  <div class="gallery-overlay__bar">
+    <div>
+      <p class="gallery-overlay__client" id="galleryClient"></p>
+      <h3 id="galleryTitle"></h3>
+    </div>
+    <button class="gallery-overlay__close" id="galleryClose" aria-label="Schließen">&times;</button>
+  </div>
+  <div class="gallery-overlay__body" id="galleryBody"></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox__close" id="lightboxClose" aria-label="Schließen">&times;</button>
+  <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Vorheriges Bild">&#8249;</button>
+  <img id="lightboxImg" src="" alt="">
+  <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Nächstes Bild">&#8250;</button>
+</div>
+
+<script src="js/script.js"></script>
+<script>window.PANDA_ASSET_BASE = "assets/";</script>
+<script src="js/panda-hunt.js"></script>
+</body>
+</html>
