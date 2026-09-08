@@ -422,7 +422,7 @@ const PROJECTS = [
     topMedia: [
       appLink("apps/kniffel/index.html", "Kniffeln", "pink"),
       appLink("apps/blog/index.html", "Schreiben", "green"),
-      appLink("https://www.kleinanzeigen.de/s-bestandsliste.html?userId=27602823", "Zu Verkaufen", "green"),
+      appLink("https://www.kleinanzeigen.de/s-bestandsliste.html?userId=27602823", "Verkaufen", "green"),
       comingSoon("Fotografieren", "pink")
     ]
   }
