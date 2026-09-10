@@ -771,7 +771,6 @@ function openGallery(index){
   galleryOverlay.classList.add("is-open");
   galleryOverlay.scrollTop = 0;
   document.body.style.overflow = "hidden";
-  window.dispatchEvent(new CustomEvent("panda-hunt:refresh"));
 }
 
 function closeGallery(){
