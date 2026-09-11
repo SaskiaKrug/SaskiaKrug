@@ -53,6 +53,13 @@
       zones.push({ top: r.top + window.scrollY, height: r.height });
     }
 
+    // Nur verfügbar, solange die About-Me-Ansicht gerade offen ist.
+    const about = document.querySelector("#aboutOverlay.is-open .about");
+    if(about){
+      const r = about.getBoundingClientRect();
+      zones.push({ top: r.top + window.scrollY, height: r.height });
+    }
+
     return zones;
   }
 

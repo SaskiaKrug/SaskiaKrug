@@ -825,6 +825,7 @@ function openAbout(){
   aboutOverlay.classList.add("is-open");
   aboutOverlay.scrollTop = 0;
   document.body.style.overflow = "hidden";
+  window.dispatchEvent(new CustomEvent("panda-hunt:refresh"));
 }
 function closeAbout(){
   aboutOverlay.classList.remove("is-open");
