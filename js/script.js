@@ -589,7 +589,7 @@ function renderMediaItem(container, item, project, imagesForLightbox){
     if(item.hoverColor) card.classList.add(`case__app-link--${item.hoverColor}`);
     card.innerHTML = `
       <span class="case__app-link__title">${item.caption}</span>
-      <span class="case__app-link__badge">Folgt in Kürze</span>
+      <span class="case__app-link__badge">Coming soon</span>
     `;
     container.appendChild(card);
     return;
