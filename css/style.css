@@ -498,6 +498,8 @@ ul{ list-style:none; }
 .contact__social a{ opacity:.8; transition:opacity .2s; }
 .contact__social a:hover{ opacity:1; }
 .contact__copy{ font-size:.78rem; color:rgba(244,242,238,.45); margin-bottom:1rem; }
+.contact__copy a{ text-decoration:underline; text-decoration-color:rgba(244,242,238,.3); transition:color .2s; }
+.contact__copy a:hover{ color:rgba(244,242,238,.8); }
 .contact__unlock{
   display:inline-flex; align-items:center; gap:.4rem;
   background:none; border:1px solid var(--line); border-radius:20px;

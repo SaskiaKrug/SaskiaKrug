@@ -817,6 +817,7 @@ document.addEventListener("keydown", (e)=>{
 
 /* ---------------- Footer year ---------------- */
 document.getElementById("year").textContent = new Date().getFullYear();
+document.getElementById("yearAbout").textContent = new Date().getFullYear();
 
 /* ============================================================
    SPITZNAMEN-GENERATOR

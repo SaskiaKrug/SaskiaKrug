@@ -1,0 +1,49 @@
+/* ---------- LEGAL PAGES (Impressum / Datenschutz) ---------- */
+.legal{
+  max-width:720px;
+  margin:0 auto;
+  padding:clamp(4rem,8vw,6rem) clamp(1.2rem,4vw,3rem) 6rem;
+}
+.legal__back{
+  display:inline-flex; align-items:center; gap:.4rem;
+  font-family:var(--sans); font-size:.85rem; color:var(--ink-soft);
+  margin-bottom:3rem;
+  transition:color .2s;
+}
+.legal__back:hover{ color:var(--ink); }
+.legal h1{
+  font-family:var(--serif); font-weight:440;
+  font-size:clamp(2rem,4.5vw,2.8rem);
+  margin-bottom:2.4rem;
+}
+.legal h2{
+  font-family:var(--serif); font-weight:440;
+  font-size:1.3rem;
+  margin:2.6rem 0 .9rem;
+}
+.legal h2:first-of-type{ margin-top:0; }
+.legal p{
+  color:var(--ink-soft);
+  margin-bottom:.9rem;
+  max-width:64ch;
+}
+.legal address{
+  font-style:normal;
+  color:var(--ink);
+  margin-bottom:.9rem;
+  line-height:1.7;
+}
+.legal a{
+  color:var(--ink);
+  text-decoration:underline;
+  text-decoration-color:var(--line);
+  text-underline-offset:.2em;
+}
+.legal a:hover{ text-decoration-color:var(--ink); }
+.legal__meta{
+  margin-top:3rem;
+  padding-top:1.5rem;
+  border-top:1px solid var(--line);
+  font-size:.8rem;
+  color:var(--ink-soft);
+}
