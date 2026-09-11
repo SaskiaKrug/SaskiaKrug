@@ -804,7 +804,6 @@ function openGallery(index){
   galleryOverlay.classList.add("is-open");
   galleryOverlay.scrollTop = 0;
   document.body.style.overflow = "hidden";
-  window.dispatchEvent(new CustomEvent("panda-hunt:refresh"));
 }
 
 function closeGallery(){
@@ -830,6 +829,7 @@ function openAbout(){
 function closeAbout(){
   aboutOverlay.classList.remove("is-open");
   document.body.style.overflow = "";
+  window.dispatchEvent(new CustomEvent("panda-hunt:refresh"));
 }
 aboutClose.addEventListener("click", closeAbout);
 document.getElementById("aboutBack").addEventListener("click", closeAbout);

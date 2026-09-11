@@ -15,53 +15,47 @@
   const STORAGE_KEY = "panda_hunt_found";
   const TOTAL = 5;
 
-  // Welche Pandas auf welcher Seite auftauchen können.
+  // Welche Pandas auf welcher Seite auftauchen können. Blog ist aktuell nicht
+  // mehr verlinkt, deshalb kein Panda mehr dort — sonst wäre die Jagd nicht
+  // mehr vollständig lösbar.
   const PAGE_PANDAS = {
-    home: ["panda-1", "panda-2", "panda-5"],
+    home: ["panda-1", "panda-2", "panda-4", "panda-5"],
     kniffel: ["panda-3"],
-    blog: ["panda-4"]
+    blog: []
   };
 
-  // Fest verankerte Bereiche, in denen Pandas landen dürfen — nie im Header/Hero.
-  const SAFE_ZONE_SELECTORS = {
-    home: ["#playground", "#contact"]
-  };
-
-  // Zusätzliche Verstecke, die nur existieren, wenn gerade eine Case Study offen ist.
-  function dynamicZoneElements(page){
-    if(page !== "home") return [];
-    return Array.from(document.querySelectorAll(
-      "#galleryOverlay.is-open .case__media-item--video"
-    ));
+  // Jeder Panda auf der Startseite hat sein eigenes, festes Versteck —
+  // dadurch bleiben schon entdeckte Pandas an ihrem Platz, statt bei jedem
+  // Refresh woanders neu aufzutauchen.
+  function zoneFromSelector(selector){
+    return function(){
+      const el = document.querySelector(selector);
+      if(!el) return null;
+      const r = el.getBoundingClientRect();
+      return { top: r.top + window.scrollY, height: r.height };
+    };
   }
-
-  // Direkt unter dem "Breaking News"-Banner sowie bei einer zufälligen,
-  // nicht passwortgeschützten Arbeiten-Kachel — beides nur auf der Startseite.
-  function homeExtraZones(){
-    const zones = [];
-
-    const ticker = document.querySelector(".ticker");
-    if(ticker){
-      const r = ticker.getBoundingClientRect();
-      zones.push({ top: r.bottom + window.scrollY, height: 170 });
-    }
-
+  function zoneFromWorkTile(){
     const tiles = Array.from(document.querySelectorAll(".work__tile:not([data-protected])"));
-    if(tiles.length){
-      const tile = tiles[Math.floor(Math.random() * tiles.length)];
-      const r = tile.getBoundingClientRect();
-      zones.push({ top: r.top + window.scrollY, height: r.height });
-    }
-
-    // Nur verfügbar, solange die About-Me-Ansicht gerade offen ist.
-    const about = document.querySelector("#aboutOverlay.is-open .about");
-    if(about){
-      const r = about.getBoundingClientRect();
-      zones.push({ top: r.top + window.scrollY, height: r.height });
-    }
-
-    return zones;
+    if(!tiles.length) return null;
+    const tile = tiles[Math.floor(Math.random() * tiles.length)];
+    const r = tile.getBoundingClientRect();
+    return { top: r.top + window.scrollY, height: r.height };
   }
+  // Nur verfügbar, solange die About-Me-Ansicht gerade offen ist.
+  function zoneFromAbout(){
+    const about = document.querySelector("#aboutOverlay.is-open .about");
+    if(!about) return null;
+    const r = about.getBoundingClientRect();
+    return { top: r.top + window.scrollY, height: r.height };
+  }
+
+  const HOME_ZONE_BY_ID = {
+    "panda-1": zoneFromSelector("#contact"),
+    "panda-2": zoneFromSelector("#playground"),
+    "panda-4": zoneFromWorkTile,
+    "panda-5": zoneFromAbout
+  };
 
   const activeCritters = {};
 
@@ -91,33 +85,22 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify({ found: list, completedAt }));
   }
 
-  function randomSpotInZones(page){
-    const selectors = SAFE_ZONE_SELECTORS[page] || [];
-    const elements = selectors.map(sel => document.querySelector(sel)).filter(Boolean)
-      .concat(dynamicZoneElements(page));
-    const zones = elements
-      .map(zone => {
-        const rect = zone.getBoundingClientRect();
-        return { top: rect.top + window.scrollY, height: rect.height };
-      })
-      .concat(page === "home" ? homeExtraZones() : [])
-      .filter(zone => zone.height > 90);
-    if(zones.length === 0) return null;
-    const zone = zones[Math.floor(Math.random() * zones.length)];
-    const pad = 50;
-    const usable = Math.max(zone.height - pad * 2, 30);
-    return zone.top + pad + Math.random() * usable;
-  }
-
   // Mindestabstand zu bereits platzierten Pandas, damit sich nie zwei so
   // überlappen, dass man beim Klicken nur den einen von beiden erwischt.
-  const MIN_DISTANCE = 90;
+  const MIN_DISTANCE = 130;
 
-  function rollPosition(page){
-    const zoneTop = SAFE_ZONE_SELECTORS[page] ? randomSpotInZones(page) : null;
+  function rollPosition(id, page){
+    let zone = null;
+    if(page === "home"){
+      const zoneFn = HOME_ZONE_BY_ID[id];
+      zone = zoneFn ? zoneFn() : null;
+      if(!zone) return null; // Versteck gerade nicht verfügbar (z. B. About zu)
+    }
     let top;
-    if(zoneTop !== null){
-      top = zoneTop;
+    if(zone){
+      const pad = 50;
+      const usable = Math.max(zone.height - pad * 2, 30);
+      top = zone.top + pad + Math.random() * usable;
     } else {
       const docHeight = Math.max(document.body.scrollHeight, window.innerHeight);
       top = 260 + Math.random() * Math.max(200, docHeight - 700);
@@ -138,11 +121,13 @@
     return nearest;
   }
 
-  function pickPosition(page){
-    let best = rollPosition(page);
+  function pickPosition(id, page){
+    let best = rollPosition(id, page);
+    if(!best) return null;
     let bestDistance = distanceToNearestCritter(best.top, best.leftPct);
     for(let attempt = 0; attempt < 24 && bestDistance < MIN_DISTANCE; attempt++){
-      const candidate = rollPosition(page);
+      const candidate = rollPosition(id, page);
+      if(!candidate) break;
       const dist = distanceToNearestCritter(candidate.top, candidate.leftPct);
       if(dist > bestDistance){
         best = candidate;
@@ -153,23 +138,25 @@
   }
 
   function spawnPanda(id, page){
+    const position = pickPosition(id, page);
+    if(!position) return; // Versteck gerade nicht verfügbar, später per Refresh erneut versuchen
+
     const el = document.createElement("button");
     el.type = "button";
     el.className = "panda-hunt-critter";
     el.setAttribute("aria-label", "Panda einsammeln");
     el.textContent = "🐼";
-
-    const { top, leftPct } = pickPosition(page);
-    el.style.top = `${Math.round(top)}px`;
-    el.style.left = `${leftPct}%`;
+    el.style.top = `${Math.round(position.top)}px`;
+    el.style.left = `${position.leftPct}%`;
 
     el.addEventListener("click", ()=> collect(id, el));
     document.body.appendChild(el);
     activeCritters[id] = el;
   }
 
-  // Wird aufgerufen, wenn sich eine Case Study öffnet: noch nicht gefundene
-  // Pandas dürfen sich neu positionieren, jetzt evtl. neben einem Video.
+  // Wird aufgerufen, wenn sich die About-Me-Ansicht öffnet oder schließt:
+  // Pandas mit einem an sie gebundenen Versteck (z. B. About) tauchen auf
+  // bzw. verschwinden wieder, alle anderen bleiben unangetastet an ihrem Platz.
   function refreshSpawns(){
     const page = document.body.dataset.pandaPage;
     if(page !== "home") return;
@@ -179,8 +166,13 @@
         if(activeCritters[id]){ activeCritters[id].remove(); delete activeCritters[id]; }
         return;
       }
-      if(activeCritters[id]) activeCritters[id].remove();
-      spawnPanda(id, page);
+      const zoneFn = HOME_ZONE_BY_ID[id];
+      const available = zoneFn ? !!zoneFn() : true;
+      if(!available){
+        if(activeCritters[id]){ activeCritters[id].remove(); delete activeCritters[id]; }
+        return;
+      }
+      if(!activeCritters[id]) spawnPanda(id, page);
     });
   }
   window.addEventListener("panda-hunt:refresh", refreshSpawns);
