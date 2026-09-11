@@ -33,6 +33,16 @@
 }
 .panda-hunt-badge__count{ font-size:.9rem; font-weight:600; }
 .panda-hunt-badge__hint{ font-size:.62rem; color:#9c988f; }
+.panda-hunt-badge__reset{
+  pointer-events:auto;
+  margin-top:.3rem;
+  font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size:.62rem; color:#9c988f;
+  background:none; border:none; padding:0; cursor:pointer;
+  text-decoration:underline; text-decoration-color:rgba(156,152,143,.4);
+  transition:color .2s;
+}
+.panda-hunt-badge__reset:hover{ color:#f5f3ee; }
 
 .panda-hunt-toast{
   position:fixed; left:50%; bottom:5rem; z-index:550;

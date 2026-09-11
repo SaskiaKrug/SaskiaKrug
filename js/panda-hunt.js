@@ -199,6 +199,17 @@
     if(found.length >= TOTAL) setTimeout(showCelebration, 600);
   }
 
+  function resetHunt(){
+    localStorage.removeItem(STORAGE_KEY);
+    Object.keys(activeCritters).forEach(id => {
+      activeCritters[id].remove();
+      delete activeCritters[id];
+    });
+    renderBadge(0);
+    const page = document.body.dataset.pandaPage;
+    (PAGE_PANDAS[page] || []).forEach(id => spawnPanda(id, page));
+  }
+
   let badgeEl = null;
   function renderBadge(count){
     if(!badgeEl){
@@ -207,7 +218,9 @@
       badgeEl.innerHTML = `
         <span class="panda-hunt-badge__count">🐼 <span data-count>0</span>/${TOTAL}</span>
         <span class="panda-hunt-badge__hint">Finde die 5 Pandas!</span>
+        <button type="button" class="panda-hunt-badge__reset" title="Suche neu starten">↺ Neu starten</button>
       `;
+      badgeEl.querySelector(".panda-hunt-badge__reset").addEventListener("click", resetHunt);
       document.body.appendChild(badgeEl);
     }
     badgeEl.querySelector("[data-count]").textContent = count;
