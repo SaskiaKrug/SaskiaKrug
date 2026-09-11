@@ -451,7 +451,7 @@ onScrollNav();
     loader.classList.add("is-hidden");
     revealEls.forEach(el => el.classList.add("is-visible"));
     document.body.style.overflow = "";
-    setTimeout(()=> loader.remove(), 700);
+    setTimeout(()=> loader.remove(), 900);
   }
 
   // Nur einmal pro Browser-Sitzung zeigen, nicht bei jedem internen Reload nerven.
@@ -468,7 +468,7 @@ onScrollNav();
     return;
   }
 
-  setTimeout(reveal, 750);
+  setTimeout(reveal, 980);
 })();
 
 /* ---------------- Scroll cue ---------------- */
