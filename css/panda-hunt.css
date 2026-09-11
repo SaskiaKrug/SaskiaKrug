@@ -1,13 +1,14 @@
 /* ---------- PANDA HUNT ---------- */
 .panda-hunt-critter{
   position:absolute; z-index:50;
-  width:32px; height:auto;
+  width:32px; height:32px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:26px; line-height:1;
   background:none; border:none; padding:0; cursor:pointer;
   filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));
   animation:pandaBob 3s ease-in-out infinite;
   transition:transform .2s;
 }
-.panda-hunt-critter img{ width:100%; display:block; }
 .panda-hunt-critter:hover{ transform:scale(1.12); }
 .panda-hunt-critter.is-collected{
   animation:none;

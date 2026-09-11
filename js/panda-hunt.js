@@ -73,14 +73,22 @@
     try {
       const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
       if(!data || !Array.isArray(data.found)) return [];
-      if(Date.now() - data.updatedAt > RESET_AFTER_MS) return [];
+      // Nur eine ABGESCHLOSSENE Jagd (alle 5 gefunden) wird nach 24h zurückgesetzt.
+      // Eine noch laufende Jagd darf nicht verfallen, nur weil zwischen zwei
+      // einzelnen Funden mehr als 24h liegen (z. B. an verschiedenen Tagen).
+      if(data.found.length >= TOTAL && data.completedAt && Date.now() - data.completedAt > RESET_AFTER_MS){
+        return [];
+      }
       return data.found;
     } catch(e){
       return [];
     }
   }
   function saveFound(list){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ found: list, updatedAt: Date.now() }));
+    let prev = null;
+    try { prev = JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch(e){}
+    const completedAt = list.length >= TOTAL ? ((prev && prev.completedAt) || Date.now()) : null;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ found: list, completedAt }));
   }
 
   function randomSpotInZones(page){
@@ -101,19 +109,12 @@
     return zone.top + pad + Math.random() * usable;
   }
 
-  function spawnPanda(id, page){
-    const el = document.createElement("button");
-    el.type = "button";
-    el.className = "panda-hunt-critter";
-    el.setAttribute("aria-label", "Panda einsammeln");
+  // Mindestabstand zu bereits platzierten Pandas, damit sich nie zwei so
+  // überlappen, dass man beim Klicken nur den einen von beiden erwischt.
+  const MIN_DISTANCE = 90;
 
-    const img = document.createElement("img");
-    img.src = `${BASE}pandas/${id}.png`;
-    img.alt = "";
-    el.appendChild(img);
-
+  function rollPosition(page){
     const zoneTop = SAFE_ZONE_SELECTORS[page] ? randomSpotInZones(page) : null;
-
     let top;
     if(zoneTop !== null){
       top = zoneTop;
@@ -122,6 +123,43 @@
       top = 260 + Math.random() * Math.max(200, docHeight - 700);
     }
     const leftPct = 6 + Math.random() * 78;
+    return { top, leftPct };
+  }
+
+  function distanceToNearestCritter(top, leftPct){
+    const leftPx = (leftPct / 100) * window.innerWidth;
+    let nearest = Infinity;
+    Object.values(activeCritters).forEach(el => {
+      const elTop = parseFloat(el.style.top);
+      const elLeftPx = (parseFloat(el.style.left) / 100) * window.innerWidth;
+      const dist = Math.hypot(leftPx - elLeftPx, top - elTop);
+      if(dist < nearest) nearest = dist;
+    });
+    return nearest;
+  }
+
+  function pickPosition(page){
+    let best = rollPosition(page);
+    let bestDistance = distanceToNearestCritter(best.top, best.leftPct);
+    for(let attempt = 0; attempt < 24 && bestDistance < MIN_DISTANCE; attempt++){
+      const candidate = rollPosition(page);
+      const dist = distanceToNearestCritter(candidate.top, candidate.leftPct);
+      if(dist > bestDistance){
+        best = candidate;
+        bestDistance = dist;
+      }
+    }
+    return best;
+  }
+
+  function spawnPanda(id, page){
+    const el = document.createElement("button");
+    el.type = "button";
+    el.className = "panda-hunt-critter";
+    el.setAttribute("aria-label", "Panda einsammeln");
+    el.textContent = "🐼";
+
+    const { top, leftPct } = pickPosition(page);
     el.style.top = `${Math.round(top)}px`;
     el.style.left = `${leftPct}%`;
 
