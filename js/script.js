@@ -526,6 +526,7 @@ function renderWorkGrid(){
     if(project.protected && !isUnlocked()) return;
     const tile = document.createElement("button");
     tile.className = "work__tile";
+    if(project.protected) tile.dataset.protected = "true";
     const label = project.client ? `${project.client} — ${project.title}` : project.title;
     tile.setAttribute("aria-label", `${label} öffnen`);
     tile.innerHTML = `

@@ -1,7 +1,7 @@
 /* ---------- PANDA HUNT ---------- */
 .panda-hunt-critter{
   position:absolute; z-index:50;
-  width:64px; height:auto;
+  width:32px; height:auto;
   background:none; border:none; padding:0; cursor:pointer;
   filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));
   animation:pandaBob 3s ease-in-out infinite;

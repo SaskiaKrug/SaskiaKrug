@@ -22,9 +22,9 @@
     blog: ["panda-4"]
   };
 
-  // Fest verankerte Bereiche, in denen Pandas landen dürfen — hält sie von den Arbeiten-Kacheln fern.
+  // Fest verankerte Bereiche, in denen Pandas landen dürfen — nie im Header/Hero.
   const SAFE_ZONE_SELECTORS = {
-    home: ["#top", "#playground", "#contact"]
+    home: ["#playground", "#contact"]
   };
 
   // Zusätzliche Verstecke, die nur existieren, wenn gerade eine Case Study offen ist.
@@ -33,6 +33,27 @@
     return Array.from(document.querySelectorAll(
       "#galleryOverlay.is-open .case__media-item--video"
     ));
+  }
+
+  // Direkt unter dem "Breaking News"-Banner sowie bei einer zufälligen,
+  // nicht passwortgeschützten Arbeiten-Kachel — beides nur auf der Startseite.
+  function homeExtraZones(){
+    const zones = [];
+
+    const ticker = document.querySelector(".ticker");
+    if(ticker){
+      const r = ticker.getBoundingClientRect();
+      zones.push({ top: r.bottom + window.scrollY, height: 170 });
+    }
+
+    const tiles = Array.from(document.querySelectorAll(".work__tile:not([data-protected])"));
+    if(tiles.length){
+      const tile = tiles[Math.floor(Math.random() * tiles.length)];
+      const r = tile.getBoundingClientRect();
+      zones.push({ top: r.top + window.scrollY, height: r.height });
+    }
+
+    return zones;
   }
 
   const activeCritters = {};
@@ -64,6 +85,7 @@
         const rect = zone.getBoundingClientRect();
         return { top: rect.top + window.scrollY, height: rect.height };
       })
+      .concat(page === "home" ? homeExtraZones() : [])
       .filter(zone => zone.height > 90);
     if(zones.length === 0) return null;
     const zone = zones[Math.floor(Math.random() * zones.length)];
