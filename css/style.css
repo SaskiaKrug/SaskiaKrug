@@ -55,6 +55,26 @@
   font-family:'Inter', sans-serif; font-size:.8rem; color:var(--accent);
   margin-top:.9rem;
 }
+/* ---------- INTRO LOADER ---------- */
+.intro-loader{
+  position:fixed; inset:0; z-index:9998;
+  background:var(--bg);
+  display:flex; align-items:center; justify-content:center;
+  transition:opacity .5s ease;
+}
+.intro-loader.is-hidden{ opacity:0; pointer-events:none; }
+.intro-loader__logo{
+  position:fixed; top:50%; left:50%;
+  width:120px;
+  transform:translate(-50%,-50%);
+  transition:transform 1s cubic-bezier(.65,0,.35,1);
+  will-change:transform;
+}
+@media (prefers-reduced-motion:reduce){
+  .intro-loader{ transition:none; }
+  .intro-loader__logo{ transition:none; }
+}
+
 html{ scroll-behavior:smooth; }
 body{
   background:var(--bg);

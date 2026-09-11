@@ -440,6 +440,47 @@ function onScrollNav(){
 window.addEventListener("scroll", onScrollNav, { passive:true });
 onScrollNav();
 
+/* ---------------- Intro-Loader: SK fliegt von der Mitte ins Nav-Logo ---------------- */
+(function(){
+  const loader = document.getElementById("introLoader");
+  const loaderLogo = document.getElementById("introLoaderLogo");
+  if(!loader || !loaderLogo) return;
+
+  // Nur einmal pro Browser-Sitzung zeigen, nicht bei jedem internen Reload nerven.
+  if(sessionStorage.getItem("sk_intro_seen")){
+    loader.remove();
+    return;
+  }
+  sessionStorage.setItem("sk_intro_seen", "true");
+
+  document.body.style.overflow = "hidden";
+
+  function finish(){
+    loader.classList.add("is-hidden");
+    document.body.style.overflow = "";
+    setTimeout(()=> loader.remove(), 600);
+  }
+
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
+    finish();
+    return;
+  }
+
+  function flyToLogo(){
+    const target = document.querySelector(".nav__logo--dark");
+    if(!target){ finish(); return; }
+    const targetRect = target.getBoundingClientRect();
+    const currentRect = loaderLogo.getBoundingClientRect();
+    const scale = targetRect.width / currentRect.width;
+    const dx = (targetRect.left + targetRect.width / 2) - (currentRect.left + currentRect.width / 2);
+    const dy = (targetRect.top + targetRect.height / 2) - (currentRect.top + currentRect.height / 2);
+    loaderLogo.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(${scale})`;
+  }
+
+  loaderLogo.addEventListener("transitionend", finish, { once:true });
+  setTimeout(flyToLogo, 700);
+})();
+
 /* ---------------- Scroll cue ---------------- */
 document.querySelectorAll("[data-scroll-to]").forEach(btn=>{
   btn.addEventListener("click", ()=>{
