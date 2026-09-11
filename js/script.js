@@ -440,45 +440,35 @@ function onScrollNav(){
 window.addEventListener("scroll", onScrollNav, { passive:true });
 onScrollNav();
 
-/* ---------------- Intro-Loader: SK fliegt von der Mitte ins Nav-Logo ---------------- */
+/* ---------------- Intro-Loader: SK zoomt mit Drehung auf die Kamera zu ---------------- */
 (function(){
   const loader = document.getElementById("introLoader");
   const loaderLogo = document.getElementById("introLoaderLogo");
+  const revealEls = document.querySelectorAll(".hero-reveal");
   if(!loader || !loaderLogo) return;
+
+  function reveal(){
+    loader.classList.add("is-hidden");
+    revealEls.forEach(el => el.classList.add("is-visible"));
+    document.body.style.overflow = "";
+    setTimeout(()=> loader.remove(), 700);
+  }
 
   // Nur einmal pro Browser-Sitzung zeigen, nicht bei jedem internen Reload nerven.
   if(sessionStorage.getItem("sk_intro_seen")){
     loader.remove();
+    revealEls.forEach(el => el.classList.add("is-visible"));
     return;
   }
   sessionStorage.setItem("sk_intro_seen", "true");
-
   document.body.style.overflow = "hidden";
 
-  function finish(){
-    loader.classList.add("is-hidden");
-    document.body.style.overflow = "";
-    setTimeout(()=> loader.remove(), 600);
-  }
-
   if(window.matchMedia("(prefers-reduced-motion: reduce)").matches){
-    finish();
+    reveal();
     return;
   }
 
-  function flyToLogo(){
-    const target = document.querySelector(".nav__logo--dark");
-    if(!target){ finish(); return; }
-    const targetRect = target.getBoundingClientRect();
-    const currentRect = loaderLogo.getBoundingClientRect();
-    const scale = targetRect.width / currentRect.width;
-    const dx = (targetRect.left + targetRect.width / 2) - (currentRect.left + currentRect.width / 2);
-    const dy = (targetRect.top + targetRect.height / 2) - (currentRect.top + currentRect.height / 2);
-    loaderLogo.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(${scale})`;
-  }
-
-  loaderLogo.addEventListener("transitionend", finish, { once:true });
-  setTimeout(flyToLogo, 700);
+  setTimeout(reveal, 750);
 })();
 
 /* ---------------- Scroll cue ---------------- */
