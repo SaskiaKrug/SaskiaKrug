@@ -418,12 +418,13 @@ const PROJECTS = [
     folder: "fun-projects",
     cover: "panda-header.jpeg",
     introHeadline: "Unfassbar, aber wahr:",
-    intro: "Ich habe ein ganzes Repertoire an spektakulären Hobbies anzubieten, denn ich liebe es zu …",
+    intro: "Ich habe ein ganzes Repertoire an spektakulären Hobbies anzubieten, denn ich liebe...",
     topMedia: [
       appLink("apps/kniffel/index.html", "Kniffeln", "pink"),
-      appLink("apps/blog/index.html", "Schreiben", "green"),
       appLink("https://www.kleinanzeigen.de/s-bestandsliste.html?userId=27602823", "Verkaufen", "green"),
-      comingSoon("Fotografieren", "pink")
+      comingSoon("Fotografieren", "white"),
+      comingSoon("Urlaub", "pink"),
+      comingSoon("Meinen Hund", "green")
     ]
   }
 ];
