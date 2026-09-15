@@ -91,7 +91,7 @@ const PROJECTS = [
       },
       {
         heading: "Plüschzoo",
-        text: "Personal Project — vom Aussterben bedrohte Tiere als überdimensionale Kuscheltiere in ihrem natürlichen Lebensraum, ein bewusster Kontrast zwischen Niedlichkeit und Bedrohung.",
+        text: "Personal Project — vom Aussterben bedrohte Tiere (und ein Panda) als überdimensionale Kuscheltiere in ihrem natürlichen Lebensraum, ein bewusster Kontrast zwischen Cuteness und Bedrohung.",
         media: [
           slideshow(["Pluesch_Panda.png","Pluesch_OrangUtan.png","Pluesch_Saola.png","Pluesch_Amurleopard.png","Pluesch_Javanashorn_1.png","Pluesch_Javanashorn_2.png","Pluesch_Sumatratiger_1.png","Pluesch_Sumatratiger_2.png","Pluesch_Eisbaer.png","Pluesch_Orca.png","Pluesch_Buckelwal.png","Pluesch_Pinguin.png","Pluesch_Seepferdchen.png","Pluesch_Rochen.png"]
             .map(f => `Pluesch-Zoo/${f}`))
