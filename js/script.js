@@ -22,6 +22,11 @@ function m(file, caption){
   return { type: mediaType(file), file, caption: caption || null };
 }
 
+// Hochkant-Video (9:16), das in einem schlichten Smartphone-Rahmen dargestellt wird.
+function phoneVideo(file, caption){
+  return { type: "phone-video", file, caption: caption || null };
+}
+
 // Zwischenüberschrift innerhalb einer Sektion (z. B. "Fotostrecke", "Social Media Verlängerung").
 function h(text){
   return { type: "heading", file: null, caption: text };
@@ -421,6 +426,17 @@ const PROJECTS = [
             "250114_Layouts_Wü_AOKomm_Route2_neu.jpg"
           ])
         ]
+      },
+      {
+        heading: "Telekom X Apple",
+        text: "Social Media Kampagne zum Launch des neuen iPads, zusammen mit der Influencerin Carmushka und ihrem Label Oh April.",
+        media: [
+          phoneVideo("TelekomXApple/190802_Telekom_Apple_iPad_Rose_15sec_V03A_9z16.mp4", "9:16"),
+          m("TelekomXApple/190802_Telekom_16zu9_Apple_iPad_Rose_20sec_V08B.mp4", "16:9 — Platzhalter, richtige Tonversion folgt noch"),
+          m("TelekomXApple/190802_Telekom_1zu1_Apple_Ipad_Rose_15sec_V03.mp4", "1:1"),
+          m("TelekomXApple/Apple_Layouts.jpg"),
+          m("TelekomXApple/Apple_Layouts2.jpg")
+        ]
       }
     ]
   },
@@ -668,7 +684,14 @@ function renderMediaItem(container, item, project, imagesForLightbox){
   const fig = document.createElement("figure");
   fig.className = `case__media-item case__media-item--${item.type}`;
 
-  if(item.type === "image"){
+  if(item.type === "phone-video"){
+    fig.innerHTML = `
+      <div class="phone-frame">
+        <div class="phone-frame__notch"></div>
+        <video class="phone-frame__video" src="${joinPath(project.folder, item.file)}" controls playsinline preload="metadata"></video>
+      </div>
+    `;
+  } else if(item.type === "image"){
     const img = document.createElement("img");
     img.src = joinPath(project.folder, item.file);
     img.alt = item.caption || `${project.client} — ${project.title}`;
