@@ -830,7 +830,8 @@ const galleryClose = document.getElementById("galleryClose");
 
 let currentGalleryIndex = null;
 
-function openGallery(index){
+function openGallery(index, options){
+  const push = !options || options.push !== false;
   const project = PROJECTS[index];
   if(project.protected && !isUnlocked()) return;
   currentGalleryIndex = index;
@@ -901,6 +902,11 @@ function openGallery(index){
   galleryOverlay.classList.add("is-open");
   galleryOverlay.scrollTop = 0;
   document.body.style.overflow = "hidden";
+  // Eigenen History-Eintrag anlegen, damit der Browser-Zurück-Button die
+  // Galerie schließt, statt die Seite komplett zu verlassen.
+  if(push){
+    history.pushState({ sk: "overlay" }, "", location.pathname + location.search);
+  }
 }
 
 function closeGallery(){
@@ -909,6 +915,11 @@ function closeGallery(){
   currentGalleryIndex = null;
   // Videos/Audios stoppen, die im Hintergrund weiterlaufen könnten
   galleryBody.querySelectorAll("video, audio").forEach(el => el.pause());
+  // Hash (z. B. #fun-projects von Kniffel/Blog) aus der URL entfernen, sonst
+  // öffnet ein Refresh die gerade geschlossene Galerie sofort wieder.
+  if(location.hash){
+    history.replaceState(null, "", location.pathname + location.search);
+  }
 }
 galleryClose.addEventListener("click", closeGallery);
 
@@ -922,6 +933,9 @@ function openAbout(){
   aboutOverlay.scrollTop = 0;
   document.body.style.overflow = "hidden";
   window.dispatchEvent(new CustomEvent("panda-hunt:refresh"));
+  // Eigenen History-Eintrag anlegen, damit der Browser-Zurück-Button die
+  // About-Ansicht schließt, statt die Seite komplett zu verlassen.
+  history.pushState({ sk: "overlay" }, "", location.pathname + location.search);
 }
 function closeAbout(){
   aboutOverlay.classList.remove("is-open");
@@ -933,6 +947,26 @@ document.getElementById("aboutBack").addEventListener("click", closeAbout);
 navAbout.addEventListener("click", (e)=>{
   e.preventDefault();
   openAbout();
+});
+
+// Browser-Zurück-Button: schließt eine offene Galerie/About-Ansicht, statt
+// die Seite zu verlassen (der dazugehörige History-Eintrag kommt aus
+// openGallery()/openAbout() oben).
+window.addEventListener("popstate", ()=>{
+  if(galleryOverlay.classList.contains("is-open")){
+    galleryOverlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+    currentGalleryIndex = null;
+    galleryBody.querySelectorAll("video, audio").forEach(el => el.pause());
+  }
+  if(aboutOverlay.classList.contains("is-open")){
+    aboutOverlay.classList.remove("is-open");
+    document.body.style.overflow = "";
+    window.dispatchEvent(new CustomEvent("panda-hunt:refresh"));
+  }
+  if(lightbox.classList.contains("is-open")){
+    closeLightbox();
+  }
 });
 
 document.addEventListener("keydown", (e)=>{
@@ -1124,7 +1158,7 @@ passwordForm.addEventListener("submit", (e)=>{
     renderWorkGrid();
     // Falls gerade eine Case Study offen ist, neu aufbauen, damit
     // frisch freigeschaltete Abschnitte sofort sichtbar werden.
-    if(currentGalleryIndex !== null) openGallery(currentGalleryIndex);
+    if(currentGalleryIndex !== null) openGallery(currentGalleryIndex, { push: false });
   } else {
     passwordError.hidden = false;
     passwordInput.value = "";
@@ -1151,5 +1185,5 @@ document.querySelectorAll(".contact__book").forEach(btn=>{
 // Fun-Projects-Übersicht öffnen, statt nur auf der Startseite zu landen.
 if(location.hash === "#fun-projects"){
   const funProjectsIndex = PROJECTS.findIndex(p => p.title === "Fun Projects");
-  if(funProjectsIndex !== -1) openGallery(funProjectsIndex);
+  if(funProjectsIndex !== -1) openGallery(funProjectsIndex, { push: false });
 }
