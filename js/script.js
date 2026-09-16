@@ -132,6 +132,7 @@ const PROJECTS = [
     title: "Magenta TV",
     folder: "telekom-magenta-tv-1",
     cover: "MagentaTV_Hauptmotiv.jpeg",
+    badge: "Hate the Player not the game.",
     sections: [
       {
         heading: "Magenta TV Part I",
@@ -563,6 +564,7 @@ function renderWorkGrid(){
     tile.setAttribute("aria-label", `${label} öffnen`);
     tile.innerHTML = `
       <img src="${ASSET_BASE}${project.folder}/${project.cover}" alt="${label}" loading="lazy">
+      ${project.badge ? `<span class="work__tile__badge">${project.badge}</span>` : ""}
       <div class="work__tile__overlay">
         <div class="work__tile__meta">
           ${project.client ? `<p class="work__tile__client">${project.client}</p>` : ""}

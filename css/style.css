@@ -353,6 +353,17 @@ ul{ list-style:none; }
   color:#fff;
   text-align:left;
 }
+.work__tile__badge{
+  position:absolute; z-index:2; top:1.4rem; left:1.4rem;
+  transform:rotate(-6deg);
+  background:#fff; color:#0b0b0a;
+  font-family:var(--sans); font-weight:600; font-size:.72rem; letter-spacing:.01em;
+  line-height:1.25; text-align:center;
+  padding:.55rem .8rem;
+  border-radius:10px;
+  max-width:9.5rem;
+  box-shadow:0 6px 16px rgba(0,0,0,.35);
+}
 .work__tile__client{
   font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; opacity:.85;
   margin-bottom:.4rem;
