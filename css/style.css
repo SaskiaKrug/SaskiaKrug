@@ -364,6 +364,14 @@ ul{ list-style:none; }
   max-width:9.5rem;
   box-shadow:0 6px 16px rgba(0,0,0,.35);
 }
+.work__tile__face-emoji{
+  position:absolute; z-index:2;
+  transform:translate(-50%,-50%);
+  font-size:clamp(2.4rem, 7vw, 4.2rem);
+  line-height:1;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.5));
+  pointer-events:none;
+}
 .work__tile__client{
   font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; opacity:.85;
   margin-bottom:.4rem;
@@ -693,6 +701,16 @@ ul{ list-style:none; }
 .gallery-overlay__body{
   max-width:1000px; margin:0 auto;
   padding:2.4rem clamp(1.2rem,4vw,3rem) 7rem;
+}
+.case__note{ max-width:62ch; margin-bottom:2.2rem; }
+.case__note-heading{
+  font-family:var(--serif); font-weight:520;
+  font-size:clamp(1.3rem,2.2vw,1.7rem);
+  color:var(--ink);
+  margin-bottom:.6rem;
+}
+.case__note-text{
+  font-size:1rem; line-height:1.6; color:var(--ink-soft);
 }
 .case__intro-headline{
   max-width:62ch;
