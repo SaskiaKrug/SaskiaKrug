@@ -27,6 +27,11 @@ function phoneVideo(file, caption){
   return { type: "phone-video", file, caption: caption || null };
 }
 
+// Quadratisches Video (1:1), eingebettet wie ein Post in einer Social-Media-Leiste.
+function feedVideo(file, caption){
+  return { type: "feed-video", file, caption: caption || null };
+}
+
 // Zwischenüberschrift innerhalb einer Sektion (z. B. "Fotostrecke", "Social Media Verlängerung").
 function h(text){
   return { type: "heading", file: null, caption: text };
@@ -378,11 +383,12 @@ const PROJECTS = [
       },
       {
         heading: "Telekom X Apple",
-        text: "Social Media Kampagne zum Launch des neuen iPads, zusammen mit der Influencerin Carmushka und ihrem Label Oh April.",
+        text: "Social Media Filme zum Launch des neuen iPads, zusammen mit der Influencerin Carmushka und ihrem Label Oh April.",
+        protected: true,
         media: [
-          phoneVideo("TelekomXApple/190802_Telekom_Apple_iPad_Rose_15sec_V03A_9z16.mp4", "9:16"),
           m("TelekomXApple/190802_Telekom_16zu9_Apple_iPad_Rose_20sec_V08B.mp4", "16:9 — Platzhalter, richtige Tonversion folgt noch"),
-          m("TelekomXApple/190802_Telekom_1zu1_Apple_Ipad_Rose_15sec_V03.mp4", "1:1")
+          phoneVideo("TelekomXApple/190802_Telekom_Apple_iPad_Rose_15sec_V03A_9z16.mp4", "9:16"),
+          feedVideo("TelekomXApple/190802_Telekom_1zu1_Apple_Ipad_Rose_15sec_V03.mp4", "1:1")
         ]
       },
       {
@@ -690,6 +696,25 @@ function renderMediaItem(container, item, project, imagesForLightbox){
         <div class="phone-frame__notch"></div>
         <video class="phone-frame__video" src="${joinPath(project.folder, item.file)}" controls playsinline preload="metadata"></video>
         <div class="phone-frame__home"></div>
+      </div>
+    `;
+  } else if(item.type === "feed-video"){
+    fig.innerHTML = `
+      <div class="feed-frame">
+        <div class="feed-frame__header">
+          <span class="feed-frame__avatar"></span>
+          <div class="feed-frame__lines">
+            <span class="feed-frame__line feed-frame__line--short"></span>
+            <span class="feed-frame__line feed-frame__line--long"></span>
+          </div>
+          <span class="feed-frame__dots">⋯</span>
+        </div>
+        <video class="feed-frame__video" src="${joinPath(project.folder, item.file)}" controls playsinline preload="metadata"></video>
+        <div class="feed-frame__actions">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.8 8.6c0 4.5-8.8 10.4-8.8 10.4S3.2 13.1 3.2 8.6a5 5 0 0 1 9-3 5 5 0 0 1 8.6 3z"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H9l-4 4v-4H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+        </div>
       </div>
     `;
   } else if(item.type === "image"){
