@@ -205,6 +205,22 @@ ul{ list-style:none; }
   100%{ opacity:0; }
 }
 
+.hero__sound{
+  position:absolute; z-index:2; bottom:2.4rem; right:clamp(1.2rem,4vw,3rem);
+  width:38px; height:38px;
+  display:flex; align-items:center; justify-content:center;
+  border:1.5px solid rgba(255,255,255,.55);
+  border-radius:50%;
+  background:rgba(11,11,10,.25); backdrop-filter:blur(4px);
+  color:#fff; cursor:pointer;
+  transition:border-color .2s, background .2s;
+}
+.hero__sound:hover{ border-color:#fff; background:rgba(11,11,10,.45); }
+.hero__sound-icon{ position:absolute; }
+.hero__sound-icon--on{ display:none; }
+.hero__sound[aria-pressed="true"] .hero__sound-icon--off{ display:none; }
+.hero__sound[aria-pressed="true"] .hero__sound-icon--on{ display:block; }
+
 /* ---------- REVEAL ---------- */
 [data-reveal]{
   opacity:0; transform:translateY(28px);

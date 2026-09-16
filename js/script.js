@@ -479,6 +479,30 @@ onScrollNav();
   setTimeout(reveal, 980);
 })();
 
+/* ---------------- Hero-Musik (aus, bis man sie manuell anschaltet) ---------------- */
+const heroVideo = document.getElementById("heroVideo");
+const heroAudio = document.getElementById("heroAudio");
+const heroSoundToggle = document.getElementById("heroSoundToggle");
+if(heroVideo && heroAudio && heroSoundToggle){
+  heroSoundToggle.addEventListener("click", ()=>{
+    const isOn = heroSoundToggle.getAttribute("aria-pressed") === "true";
+    if(isOn){
+      heroAudio.pause();
+      heroSoundToggle.setAttribute("aria-pressed", "false");
+      heroSoundToggle.setAttribute("aria-label", "Ton einschalten");
+    } else {
+      heroAudio.currentTime = heroVideo.currentTime % (heroAudio.duration || heroVideo.duration || 1);
+      heroAudio.play().catch(()=>{});
+      heroSoundToggle.setAttribute("aria-pressed", "true");
+      heroSoundToggle.setAttribute("aria-label", "Ton ausschalten");
+    }
+  });
+  // Pausiert, wenn man den Tab wechselt oder das Fenster minimiert.
+  document.addEventListener("visibilitychange", ()=>{
+    if(document.hidden) heroAudio.pause();
+  });
+}
+
 /* ---------------- Scroll cue ---------------- */
 document.querySelectorAll("[data-scroll-to]").forEach(btn=>{
   btn.addEventListener("click", ()=>{
