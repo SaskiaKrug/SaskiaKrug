@@ -222,6 +222,8 @@ const PROJECTS = [
           m("5G Part III/5G Kampagne_PartIII_TVC.mp4", "60\" TVC"),
           m("5G Part III/5G Kampagne_PartIII_Doku.mp4", "Making Of"),
           m("5G Part III/5G Kampagne_PartIII_DC.mp4", "Director's Cut"),
+          m("5G Part III/Apple_Layouts.jpg"),
+          m("5G Part III/Apple_Layouts2.jpg"),
           ...[1,2,3,4,5,6,7].map(n => m(`5G Part III/Reaction${n}.gif`, "Community-Reaktion"))
         ]
       }
@@ -433,9 +435,7 @@ const PROJECTS = [
         media: [
           phoneVideo("TelekomXApple/190802_Telekom_Apple_iPad_Rose_15sec_V03A_9z16.mp4", "9:16"),
           m("TelekomXApple/190802_Telekom_16zu9_Apple_iPad_Rose_20sec_V08B.mp4", "16:9 — Platzhalter, richtige Tonversion folgt noch"),
-          m("TelekomXApple/190802_Telekom_1zu1_Apple_Ipad_Rose_15sec_V03.mp4", "1:1"),
-          m("TelekomXApple/Apple_Layouts.jpg"),
-          m("TelekomXApple/Apple_Layouts2.jpg")
+          m("TelekomXApple/190802_Telekom_1zu1_Apple_Ipad_Rose_15sec_V03.mp4", "1:1")
         ]
       }
     ]
@@ -689,6 +689,7 @@ function renderMediaItem(container, item, project, imagesForLightbox){
       <div class="phone-frame">
         <div class="phone-frame__notch"></div>
         <video class="phone-frame__video" src="${joinPath(project.folder, item.file)}" controls playsinline preload="metadata"></video>
+        <div class="phone-frame__home"></div>
       </div>
     `;
   } else if(item.type === "image"){
