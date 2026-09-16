@@ -189,20 +189,21 @@ ul{ list-style:none; }
 
 .scroll-cue{
   position:absolute; bottom:2.4rem; left:50%; transform:translateX(-50%);
-  z-index:2; width:26px; height:42px;
-  border:1.5px solid rgba(255,255,255,.75);
-  border-radius:14px;
-  background:transparent; cursor:pointer;
+  z-index:2;
+  padding:.4rem;
+  border:none; background:transparent; cursor:pointer;
+  color:rgba(255,255,255,.85);
 }
-.scroll-cue span{
-  position:absolute; top:7px; left:50%; width:4px; height:8px;
-  margin-left:-2px; border-radius:2px; background:#fff;
-  animation:cue 1.8s ease infinite;
+.scroll-cue svg{
+  display:block;
+  animation:cue 1.8s ease-in-out infinite;
 }
 @keyframes cue{
-  0%{ transform:translateY(0); opacity:1; }
-  70%{ transform:translateY(12px); opacity:0; }
-  100%{ opacity:0; }
+  0%, 100%{ transform:translateY(0); opacity:.5; }
+  50%{ transform:translateY(7px); opacity:1; }
+}
+@media (prefers-reduced-motion:reduce){
+  .scroll-cue svg{ animation:none; }
 }
 
 .hero__sound{
