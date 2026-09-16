@@ -132,7 +132,6 @@ const PROJECTS = [
     title: "Magenta TV",
     folder: "telekom-magenta-tv-1",
     cover: "MagentaTV_Hauptmotiv.jpeg",
-    faceEmoji: { emoji: "🤡", top: "43%", left: "42%" },
     note: {
       heading: "Aus gegebenem Anlass",
       text: "Es gab bei mir die Überlegung die Arbeiten erst rauszunehmen, da ich Christian Ulmen eigentlich nicht mehr in meinem Portfolio haben möchte, aber da es einen Großteil meiner Arbeit bei DDB widerspiegelt, hier ein Auszug aus der Kampagne:"
