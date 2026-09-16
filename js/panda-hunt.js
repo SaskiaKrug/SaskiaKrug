@@ -192,27 +192,39 @@
   }
 
   function resetHunt(){
+    const previouslyFound = loadFound();
     localStorage.removeItem(STORAGE_KEY);
     renderBadge(0);
+    launchFoundPandasFromBadge(previouslyFound.length);
 
-    const ids = Object.keys(activeCritters);
-    if(!ids.length){
-      const page = document.body.dataset.pandaPage;
-      (PAGE_PANDAS[page] || []).forEach(id => spawnPanda(id, page));
-      return;
-    }
-
-    ids.forEach(id => {
-      const el = activeCritters[id];
+    Object.keys(activeCritters).forEach(id => {
+      activeCritters[id].remove();
       delete activeCritters[id];
-      el.classList.add("is-popping");
-      el.addEventListener("animationend", ()=> el.remove(), { once: true });
     });
+    const page = document.body.dataset.pandaPage;
+    (PAGE_PANDAS[page] || []).forEach(id => spawnPanda(id, page));
+  }
 
-    setTimeout(()=>{
-      const page = document.body.dataset.pandaPage;
-      (PAGE_PANDAS[page] || []).forEach(id => spawnPanda(id, page));
-    }, 420);
+  // Die im Zähler-Kästchen "gesammelten" Pandas sichtbar aus der Box
+  // herausfeuern, bevor sie sich neu verstecken — statt dass der Zähler
+  // einfach kommentarlos auf 0 springt.
+  function launchFoundPandasFromBadge(count){
+    if(!count || !badgeEl) return;
+    const box = badgeEl.getBoundingClientRect();
+    for(let i = 0; i < count; i++){
+      const fly = document.createElement("span");
+      fly.className = "panda-hunt-fly";
+      fly.textContent = "🐼";
+      fly.style.left = `${box.left + 22}px`;
+      fly.style.top = `${box.top + 16}px`;
+      const angle = (-90 + (Math.random() * 140 - 70)) * (Math.PI / 180);
+      const distance = 90 + Math.random() * 70;
+      fly.style.setProperty("--fly-x", `${Math.cos(angle) * distance}px`);
+      fly.style.setProperty("--fly-y", `${Math.sin(angle) * distance}px`);
+      fly.style.animationDelay = `${i * 70}ms`;
+      fly.addEventListener("animationend", ()=> fly.remove(), { once: true });
+      document.body.appendChild(fly);
+    }
   }
 
   let badgeEl = null;
