@@ -377,6 +377,15 @@ const PROJECTS = [
         ]
       },
       {
+        heading: "Telekom X Apple",
+        text: "Social Media Kampagne zum Launch des neuen iPads, zusammen mit der Influencerin Carmushka und ihrem Label Oh April.",
+        media: [
+          phoneVideo("TelekomXApple/190802_Telekom_Apple_iPad_Rose_15sec_V03A_9z16.mp4", "9:16"),
+          m("TelekomXApple/190802_Telekom_16zu9_Apple_iPad_Rose_20sec_V08B.mp4", "16:9 — Platzhalter, richtige Tonversion folgt noch"),
+          m("TelekomXApple/190802_Telekom_1zu1_Apple_Ipad_Rose_15sec_V03.mp4", "1:1")
+        ]
+      },
+      {
         heading: "Premier Protein",
         text: "Einführungskampagne auf dem deutschen Markt der Protein Riegel und Shakes.",
         media: [
@@ -427,15 +436,6 @@ const PROJECTS = [
             "250114_Layouts_Wü_AOKomm_Route2_final2.jpg",
             "250114_Layouts_Wü_AOKomm_Route2_neu.jpg"
           ])
-        ]
-      },
-      {
-        heading: "Telekom X Apple",
-        text: "Social Media Kampagne zum Launch des neuen iPads, zusammen mit der Influencerin Carmushka und ihrem Label Oh April.",
-        media: [
-          phoneVideo("TelekomXApple/190802_Telekom_Apple_iPad_Rose_15sec_V03A_9z16.mp4", "9:16"),
-          m("TelekomXApple/190802_Telekom_16zu9_Apple_iPad_Rose_20sec_V08B.mp4", "16:9 — Platzhalter, richtige Tonversion folgt noch"),
-          m("TelekomXApple/190802_Telekom_1zu1_Apple_Ipad_Rose_15sec_V03.mp4", "1:1")
         ]
       }
     ]
