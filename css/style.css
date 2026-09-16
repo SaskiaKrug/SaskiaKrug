@@ -759,7 +759,7 @@ ul{ list-style:none; }
 .phone-frame{
   position:relative;
   width:min(280px, 78vw);
-  aspect-ratio:9/19.5;
+  aspect-ratio:9/17;
   padding:.85rem;
   background:#161616;
   border:1px solid rgba(255,255,255,.12);
@@ -784,6 +784,7 @@ ul{ list-style:none; }
 .phone-frame__video{
   width:100%; height:100%;
   object-fit:cover;
+  object-position:center 30%;
   border-radius:2.15rem;
   display:block;
   background:#000;
