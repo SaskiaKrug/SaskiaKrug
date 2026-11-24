@@ -105,8 +105,7 @@ const PROJECTS = [
         media: [
           m("CosmosDirekt/CosmosDirekt_Webseite_StandardDepot.png"),
           m("CosmosDirekt/CosmosDirekt_Webseite_RisikoLeben.png"),
-          m("CosmosDirekt/CosmosDirekt_SoMe_StandardDepot_Post.jpg"),
-          m("CosmosDirekt/CosmosDirekt_SoMe_StandardDepot_Story.jpg")
+          m("CosmosDirekt/CosmosDirekt_SoMe_StandardDepot_Post.jpg")
         ]
       },
       {
