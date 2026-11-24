@@ -103,9 +103,6 @@ const PROJECTS = [
         heading: "CosmosDirekt",
         text: "Social-Media-Ads und Landingpage-Motive für Standarddepot und Risikolebensversicherung, mit KI-generierten Bildwelten. Aktuell live.",
         media: [
-          m("CosmosDirekt/CosmosDirekt_Webseite_StandardDepot.png"),
-          m("CosmosDirekt/CosmosDirekt_Webseite_RisikoLeben.png"),
-          m("CosmosDirekt/CosmosDirekt_SoMe_StandardDepot_Post.jpg"),
           slideshow([2,1,3,4,5,6,7,8,9].map(n => `CosmosDirekt/CosmosDirekt_KI_0${n}.jpg`)),
           m("CosmosDirekt/CosmosDirekt_Assets_01.jpeg"),
           m("CosmosDirekt/CosmosDirekt_Assets_02.jpeg")
