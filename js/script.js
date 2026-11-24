@@ -100,6 +100,16 @@ const PROJECTS = [
         ]
       },
       {
+        heading: "CosmosDirekt",
+        text: "Social-Media-Ads und Landingpage-Motive für Standarddepot und Risikolebensversicherung, mit KI-generierten Bildwelten. Aktuell live.",
+        media: [
+          m("CosmosDirekt/CosmosDirekt_Webseite_StandardDepot.png"),
+          m("CosmosDirekt/CosmosDirekt_Webseite_RisikoLeben.png"),
+          m("CosmosDirekt/CosmosDirekt_SoMe_StandardDepot_Post.jpg"),
+          m("CosmosDirekt/CosmosDirekt_SoMe_StandardDepot_Story.jpg")
+        ]
+      },
+      {
         heading: "Plüschzoo",
         text: "Personal Project — Kuscheltiere kurz vorm Aussterben, oder it's a fluffy line between cuteness and death and a panda.",
         media: [
